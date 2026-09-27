@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<a href="menu_la_luna_oficio.html">Ir al segundo menú</a>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -193,7 +193,7 @@
     }
 
     .tagline {
-      font-family: 'Monserrat', serif;
+      font-family: 'Montserrat', sans-serif;
       color: var(--grey);
       font-size: 11.5px;
       margin-top: 5px;
@@ -228,8 +228,8 @@
     }
 
     .back-header .kicker {
-      font-family: 'Cormorant Garamond';
-      font-style: italic;
+      font-family: 'Cinzel', serif;
+      font-style: normal;
       color: var(--grey);
       font-size: 12px;
       margin-top: 3px;
@@ -238,6 +238,69 @@
     .content-flow {
       column-count: 2;
       column-gap: 16px;
+    }
+
+    #page2 .content-flow {
+      column-count: 3;
+      column-gap: 12px;
+    }
+
+    /* Page 1 (Desayunos) has far less content than Page 2, so it has real headroom
+       on a legal-size sheet. Bump its type scale for readability without touching
+       Page 2's much tighter budget. */
+    #page1 .dish-name {
+      font-size: 11px;
+    }
+
+    #page1 .dish-en {
+      font-size: 8.5px;
+    }
+
+    #page1 .price {
+      font-size: 12.5px;
+    }
+
+    #page1 .desc {
+      font-size: 9.5px;
+    }
+
+    #page1 .category-title .es {
+      font-size: 12.5px;
+    }
+
+    #page1 .category-title .note {
+      font-size: 9px;
+    }
+
+    #page1 .tagline {
+      font-size: 12.5px;
+    }
+
+    #page1 .dish {
+      margin-bottom: 6.5px;
+    }
+
+    #page1 .category {
+      margin-bottom: 11px;
+    }
+
+    #page1 .desc {
+      line-height: 1.45;
+    }
+
+    #page1 .photo-block {
+      aspect-ratio: 16/10;
+    }
+
+    /* Page 2 (Bebidas) is much denser, so give it a bit more safety margin
+       against font-metric differences (real Google Fonts vs. this preview)
+       by tightening its vertical rhythm slightly further. */
+    #page2 .dish {
+      margin-bottom: 3px;
+    }
+
+    #page2 .category {
+      margin-bottom: 5px;
     }
 
     .category {
@@ -274,11 +337,6 @@
       text-align: right;
     }
 
-    .category-title .star {
-      color: var(--grey);
-      font-size: 8.5px;
-    }
-
     .dish {
       margin-bottom: 4px;
       break-inside: avoid;
@@ -312,7 +370,7 @@
     }
 
     .price {
-      font-family: 'Monserrat', serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 10.5px;
       color: var(--white);
@@ -333,7 +391,10 @@
       overflow: hidden;
       border: 1px solid var(--hair-soft);
       border-radius: 3px;
+      aspect-ratio: 4/3;
     }
+
+
 
     .photo-block img {
       width: 100%;
@@ -343,18 +404,6 @@
       object-position: center 50%;
       /* ajusta qué parte se mantiene visible */
       filter: brightness(.88);
-    }
-
-    .photo-block.tall {
-      aspect-ratio: 16/9;
-    }
-
-    .photo-block.wide {
-      aspect-ratio: 16/9 ;
-    }
-
-    .photo-block.square {
-      aspect-ratio: 16/9;
     }
 
     .photo-block figcaption {
@@ -367,17 +416,18 @@
     }
 
     .photo-block figcaption .es {
-      font-family: 'Monserrat', serif;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
       font-weight: 600;
-      font-size: 10.5px;
+      font-size: 11px;
       color: var(--ivory);
       display: block;
-      line-height: 1.1;
+      line-height: 1.2;
     }
 
     .photo-block figcaption .en {
-      font-family: 'Montserrat';
-      font-size: 7px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5px;
       color: var(--grey);
       display: block;
     }
@@ -412,12 +462,6 @@
       font-size: 10px;
     }
 
-    .star-icon {
-      color: #e2b041;
-      font-size: 8px;
-      margin-left: 2px;
-    }
-
     @media (max-width:720px) {
       .content-flow {
         column-count: 1;
@@ -428,6 +472,7 @@
       @page {
         size: legal portrait;
         margin: 0.4cm;
+        /* Reducimos ligeramente el margen de la hoja para ganar espacio */
       }
 
       body {
@@ -450,7 +495,10 @@
         border: none !important;
         max-width: 100% !important;
         width: 100%;
-        padding: 10px 15px !important;
+        min-height: 100vh;
+        /* Asegura que la página tome toda la altura útil */
+        padding: 20px 24px 16px !important;
+        /* Reducimos un poco el relleno interno de la página */
         break-after: page;
         page-break-after: always;
       }
@@ -465,7 +513,7 @@
       }
 
       .photo-block img {
-        filter: brightness(.82) !important;
+        filter: grayscale(.1) brightness(.78) !important;
       }
     }
   </style>
@@ -477,15 +525,18 @@
     <div class="toolbar-inner">
       <div class="brandmark cinzel">LA LUN<span>Λ</span></div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-        <button class="btn-outline" id="editBtn" onclick="toggleEdit()"><i class="fa-solid fa-pen"></i> <span
-            id="editBtnLabel">Editar</span></button>
+        <a class="btn-outline" href="menu_la_luna_oficio.html" style="text-decoration:none;"><i
+            class="fa-solid fa-arrow-right"></i> Ir al segundo menú</a>
+        <button class="btn-outline" id="editBtn" onclick="toggleEdit()" aria-pressed="false"><i
+            class="fa-solid fa-pen"></i> <span id="editBtnLabel">Editar</span></button>
         <button class="btn-solid" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Guardar PDF</button>
       </div>
     </div>
   </header>
 
   <div class="edit-banner no-print" id="editBanner"><i class="fa-solid fa-circle-info"></i> Modo edición activado: haz
-    clic en cualquier texto o precio para modificarlo directamente.</div>
+    clic en cualquier texto o precio para modificarlo. <strong>Nota:</strong> estos cambios son solo temporales en esta
+    pestaña (no se guardan al recargar) — ajusta y luego exporta a PDF antes de cerrar.</div>
   <p class="page-note no-print">Tamaño oficio (legal), vertical · 2 páginas separadas (Página 1: Desayunos & Kids |
     Página 2: Bebidas)<br>
     <strong>Importante al exportar a PDF:</strong> En el diálogo de impresión, selecciona el tamaño de papel
@@ -536,7 +587,7 @@
 
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Chilaquiles con Proteína
-                <span class="star-icon"></span></span><span class="dish-en editable" contenteditable="false">Chilaquiles
+              </span><span class="dish-en editable" contenteditable="false">Chilaquiles
                 with Protein</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$22.00</span></div>
             <p class="desc editable" contenteditable="false">Asada, Chorizo, Pollo o Huevo con crema y queso. — Steak,
@@ -545,7 +596,7 @@
 
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Chilaquiles con Arrachera
-                <span class="star-icon"></span></span><span class="dish-en editable" contenteditable="false">Skirt
+              </span><span class="dish-en editable" contenteditable="false">Skirt
                 Steak Chilaquiles</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$30.00</span></div>
             <p class="desc editable" contenteditable="false">Jugosa carne de arrachera, crema y queso. — Juicy skirt
@@ -561,10 +612,12 @@
           </div>
 
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Enchiladas de Pollo <span
-                  class="star-icon"></span> </span><span class="dish-en editable" contenteditable="false">Chicken
-                Enchiladas</span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$22.00</span></div>
+            <div class="dish-row">
+              <span class="dish-name editable" contenteditable="false">Enchiladas de Pollo</span>
+              <span class="dish-en editable" contenteditable="false">Chicken Enchiladas</span>
+              <span class="leader"></span>
+              <span class="price editable" contenteditable="false">$22.00</span>
+            </div>
             <p class="desc editable" contenteditable="false">Lechuga, cilantro, crema, queso y cebolla. — Topped with
               lettuce, cilantro, cream, cheese and onion.</p>
           </div>
@@ -599,8 +652,8 @@
           </div>
 
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Huevos con Machaca <span
-                  class="star-icon"></span> </span><span class="dish-en editable" contenteditable="false">Shredded
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Huevos con
+                Machaca</span><span class="dish-en editable" contenteditable="false">Shredded
                 Beef with Eggs</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$22.00</span></div>
             <p class="desc editable" contenteditable="false">Carne deshebrada con tomate, cebolla y jalapeño. — Shredded
@@ -616,8 +669,8 @@
           </div>
 
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Desayuno Americano <span
-                  class="star-icon"></span></span><span class="dish-en editable" contenteditable="false">American
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Desayuno
+                Americano</span><span class="dish-en editable" contenteditable="false">American
                 Breakfast Combo</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$19.99</span></div>
             <p class="desc editable" contenteditable="false">2 huevos al gusto, tocino, hash browns y pancakes o pan
@@ -658,8 +711,8 @@
               Burritos &amp; Quesadillas</span></div>
 
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Breakfast Burrito <span
-                  class="star-icon"></span></span><span class="dish-en editable" contenteditable="false">Breakfast
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Breakfast Burrito
+              </span><span class="dish-en editable" contenteditable="false">Breakfast
                 Burrito</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$16.99</span></div>
             <p class="desc editable" contenteditable="false">Jamón, Chorizo, Salchicha, Pollo o Asada en tortilla
@@ -733,7 +786,7 @@
 
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Gorditas de Queso (Orden de
-                3) <span class="star-icon"></span></span><span class="dish-en editable" contenteditable="false">Cheese
+                3)</span><span class="dish-en editable" contenteditable="false">Cheese
                 Gorditas (Order of 3)</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$21.00</span></div>
             <p class="desc editable" contenteditable="false">Masa de maíz con jalapeño y queso. — Thick corn tortillas
@@ -762,8 +815,8 @@
           </div>
 
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Nuggets de Pollo <span
-                  class="star-icon"></span></span><span class="dish-en editable" contenteditable="false">Kids Chicken
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Nuggets de Pollo</span><span
+                class="dish-en editable" contenteditable="false">Kids Chicken
                 Nuggets</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$12.00</span></div>
             <p class="desc editable" contenteditable="false">Incluye papas fritas y una soda o jugo. — Includes french
@@ -946,6 +999,75 @@
         </figure>
 
         <div class="category">
+          <div class="category-title"><span class="es">Whisky</span><span class="note">Whisky</span></div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Jack Daniel's</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Seagram's 7</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Old Parr</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$11.99</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Crown Royal Apple</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$11.99</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Crown Royal
+                Vanilla</span><span class="leader"></span><span class="price editable"
+                contenteditable="false">$11.99</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Crown Royal Peach</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$11.99</span></div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Vino</span><span class="note">Wine</span></div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Chardonnay</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Merlot</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Cabernet
+                Sauvignon</span><span class="leader"></span><span class="price editable"
+                contenteditable="false">$13.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Pinot Grigio</span><span
+                class="dish-en editable" contenteditable="false">Pinot Grigio (California)</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
+          </div>
+          <!-- Imagen 3 Bebidas -->
+          <figure class="photo-block tall">
+            <img src="images/piñacolada.png" alt="Coctelería de la Casa">
+            <figcaption>
+              <span class="es editable" contenteditable="false">Piña Colada</span>
+            </figcaption>
+          </figure>
+
+        </div>
+
+
+        <!-- Imagen 2 Bebidas -->
+        <figure class="photo-block tall">
+          <img src="images/margari.png" alt="Coctelería de la Casa">
+          <figcaption>
+            <span class="es editable" contenteditable="false">Coctelería &amp; Cantaritos</span>
+            <span class="en editable" contenteditable="false">Signature Cocktails &amp; Spirits</span>
+          </figcaption>
+        </figure>
+
+        <div class="category">
           <div class="category-title"><span class="es">Cócteles</span><span class="note">Cocktails</span></div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Cantarito Grande</span><span
@@ -961,9 +1083,8 @@
               and pineapple juice.</p>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Margarita <span
-                  class="star-icon"></span></span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$13.99</span></div>
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Margarita</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.99</span></div>
             <p class="desc editable" contenteditable="false">Clásica, Fresa, Kiwi o Mango. — Classic, Strawberry, Kiwi
               or Mango.</p>
           </div>
@@ -977,9 +1098,8 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$15.00</span></div>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mojito <span
-                  class="star-icon"></span></span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$13.99</span></div>
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mojito</span></span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.99</span></div>
             <p class="desc editable" contenteditable="false">Piña, Mango, Pepino, Kiwi o Fresa. — Pineapple, Mango,
               Cucumber, Kiwi or Strawberry.</p>
           </div>
@@ -1017,9 +1137,8 @@
               with grapefruit soda, lime and salt.</p>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Eclipse <span
-                  class="star-icon"></span></span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$13.99</span></div>
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Eclipse </span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.99</span></div>
             <p class="desc editable" contenteditable="false">Tequila, jugo de naranja y dragonfruit. — Tequila, orange
               juice and dragonfruit.</p>
           </div>
@@ -1058,8 +1177,8 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$13.99</span></div>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mini Patrón <span
-                  class="star-icon"></span></span><span class="leader"></span><span class="price editable"
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mini
+                Patrón</span></span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$18.00</span></div>
           </div>
           <div class="dish">
@@ -1074,11 +1193,6 @@
           </div>
         </div>
 
-        <!-- Imagen 2 Bebidas -->
-        <figure class="photo-block tall">
-          <img src="images/margari.png" alt="Coctelería de la Casa">
-
-        </figure>
 
         <div class="category">
           <div class="category-title"><span class="es">Shots</span><span class="note">Cocktail Shots · 4 pcs</span>
@@ -1113,6 +1227,77 @@
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Barbie Lemon</span><span
                 class="leader"></span><span class="price editable" contenteditable="false">$14.00</span></div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Shots de Tequila</span><span class="note">Tequila Shots</span>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Patrón Silver</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Puerto Vallarta</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Papa Bueno Añejo</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$17.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Papa Bueno Silver</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Insolente</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$14.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Cazadores</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Herradura Silver</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Herradura Ultra
+                Añejo</span><span class="leader"></span><span class="price editable"
+                contenteditable="false">$17.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Don Julio Blanco</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Don Julio 70</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Don Julio Añejo</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$17.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">José Cuervo
+                Blanco</span><span class="leader"></span><span class="price editable"
+                contenteditable="false">$8.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Luna Azul</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">1800 Blanco</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Sauza</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Casa Amigos</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
           </div>
         </div>
 
@@ -1265,128 +1450,13 @@
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Corona</span><span
                 class="leader"></span><span class="price editable" contenteditable="false">$5.00</span></div>
           </div>
-        </div>
-
-        <div class="category">
-          <div class="category-title"><span class="es">Shots de Tequila</span><span class="note">Tequila Shots</span>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Patrón Silver</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Puerto Vallarta</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Papa Bueno Añejo</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$17.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Papa Bueno Silver</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Insolente</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$14.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Cazadores</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Herradura Silver</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Herradura Ultra
-                Añejo</span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$17.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Don Julio Blanco</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Don Julio 70</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Don Julio Añejo</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$17.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">José Cuervo
-                Blanco</span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$8.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Luna Azul</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">1800 Blanco</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Sauza</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Casa Amigos</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
-          </div>
-        </div>
-
-        <div class="category">
-          <div class="category-title"><span class="es">Whisky</span><span class="note">Whisky</span></div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Jack Daniel's</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$10.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Seagram's 7</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$8.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Old Parr</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$11.99</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Crown Royal Apple</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$11.99</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Crown Royal
-                Vanilla</span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$11.99</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Crown Royal Peach</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$11.99</span></div>
-          </div>
-        </div>
-
-        <div class="category">
-          <div class="category-title"><span class="es">Vino</span><span class="note">Wine</span></div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Chardonnay</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Merlot</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Cabernet
-                Sauvignon</span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$13.00</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Pinot Grigio</span><span
-                class="dish-en editable" contenteditable="false">Pinot Grigio (California)</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$13.00</span></div>
-          </div>
+          <!-- Imagen 4 Bebidas -->
+          <figure class="photo-block tall">
+            <img src="images/cantarito1.png" alt="Coctelería de la Casa">
+            <figcaption>
+              <span class="es editable" contenteditable="false">Cantarito</span>
+            </figcaption>
+          </figure>
         </div>
 
       </div>
@@ -1416,7 +1486,8 @@
         el.classList.toggle('on', editing);
       });
       document.getElementById('editBanner').style.display = editing ? 'block' : 'none';
-      document.getElementById('editBtnLabel').innerText = editing ? 'Guardar' : 'Editar';
+      document.getElementById('editBtnLabel').innerText = editing ? 'Listo' : 'Editar';
+      document.getElementById('editBtn').setAttribute('aria-pressed', editing ? 'true' : 'false');
     }
   </script>
 </body>
