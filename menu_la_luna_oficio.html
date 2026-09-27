@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LA LUNΛ — Kitchen & Bar | Menú (Oficio, 2 páginas)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --white: #fff;
+      --ivory: #f4f2ec;
+      --grey: #9a9a94;
+      --grey-dim: #6f6f6a;
+      --hair: rgba(255, 255, 255, .16);
+      --hair-soft: rgba(255, 255, 255, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #0e0e0e;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .cinzel { font-family: 'Cinzel', serif; }
+
+    .toolbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10, 10, 10, .97);
+      border-bottom: 1px solid var(--hair);
+      padding: 12px 18px;
+    }
+    .toolbar-inner {
+      max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .brandmark { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; letter-spacing: .2em; }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--hair); color: var(--ivory);
+      font-size: 11px; padding: 8px 14px; border-radius: 8px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; font-family: 'Montserrat';
+    }
+    .btn-solid {
+      background: var(--white); color: #000; font-weight: 700; font-size: 11px;
+      padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; font-family: 'Montserrat';
+    }
+    .edit-banner {
+      display: none; background: rgba(255, 255, 255, .06); border-bottom: 1px solid var(--hair);
+      text-align: center; font-size: 11px; color: var(--ivory); padding: 8px;
+    }
+    .editable.on {
+      outline: 1px dashed rgba(255, 255, 255, .5); outline-offset: 2px;
+      background: rgba(255, 255, 255, .05); border-radius: 3px;
+    }
+    .page-note {
+      max-width: 960px; margin: 14px auto 0; text-align: center; font-size: 11px;
+      color: var(--grey); font-family: 'Montserrat';
+    }
+    .page-note strong{ color: var(--ivory); }
+
+    /* page shell — screen preview only, oficio/legal ratio just for on-screen framing */
+    main {
+      max-width: 960px; margin: 0 auto; padding: 24px 14px 60px;
+      display: flex; flex-direction: column; align-items: center; gap: 30px;
+    }
+    .page {
+      background: #000; border: 1px solid rgba(255, 255, 255, .22);
+      width: 100%; max-width: 850px;
+      padding: 26px 30px 22px;
+      position: relative; display: flex; flex-direction: column;
+    }
+    .page-label {
+      position: absolute; top: 8px; right: 14px; font-size: 8px;
+      letter-spacing: .15em; text-transform: uppercase; color: var(--grey-dim);
+    }
+
+    .menu-header { text-align: center; padding-bottom: 12px; border-bottom: 1px solid var(--hair); margin-bottom: 14px; }
+    .logo-line { font-size: 32px; letter-spacing: .28em; font-weight: 900; text-transform: uppercase; margin: 0; }
+    .sub-line { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px; }
+    .sub-line span.tag { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--grey); font-weight: 600; }
+    .sub-line .rule { width: 30px; height: 1px; background: var(--hair); }
+    .tagline { font-family: 'Cormorant Garamond'; font-style: italic; color: var(--grey); font-size: 12px; margin-top: 7px; }
+    .tagline .en { color: var(--grey-dim); font-size: 10.5px; }
+    .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 9px; font-size: 9px; color: var(--grey); }
+    .socials i { color: var(--white); margin-right: 4px; }
+
+    .back-header { text-align: center; padding-bottom: 10px; border-bottom: 1px solid var(--hair); margin-bottom: 14px; }
+    .back-header .mark { font-size: 16px; letter-spacing: .22em; font-weight: 700; }
+    .back-header .kicker { font-family: 'Cormorant Garamond'; font-style: italic; color: var(--grey); font-size: 11.5px; margin-top: 4px; }
+
+    .content-flow { column-count: 2; column-gap: 26px; }
+
+    .category { break-inside: avoid; margin-bottom: 13px; }
+    .category-title {
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700;
+      display: flex; align-items: baseline; justify-content: space-between; gap: 6px;
+      border-bottom: 1px solid var(--hair); padding-bottom: 4px; margin-bottom: 6px;
+    }
+    .category-title .es { white-space: nowrap; }
+    .category-title .note {
+      font-family: 'Montserrat'; font-size: 8px; letter-spacing: .02em; text-transform: none;
+      color: var(--grey-dim); font-weight: 500; font-style: italic; text-align: right;
+    }
+    .category-title .star { color: var(--grey); font-size: 9px; }
+
+    .dish { margin-bottom: 5px; }
+    .dish-row { display: flex; align-items: baseline; gap: 4px; }
+    .dish-name { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 12.5px; color: var(--white); }
+    .dish-en { font-family: 'Montserrat'; font-style: italic; font-size: 8.3px; color: var(--grey-dim); }
+    .leader { flex: 1; border-bottom: 1px dotted rgba(255, 255, 255, .28); position: relative; top: -3px; margin: 0 1px; }
+    .price { font-family: 'Cormorant Garamond'; font-weight: 700; font-size: 12.5px; color: var(--white); white-space: nowrap; }
+    .desc { font-family: 'Montserrat'; font-size: 7.6px; color: var(--grey); line-height: 1.3; margin: 1px 0 0; }
+    .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px 10px; }
+    .extras-grid .dish { margin-bottom: 3px; }
+
+    .photo-block { break-inside: avoid; margin: 0 0 13px; position: relative; overflow: hidden; border: 1px solid var(--hair-soft); }
+    .photo-block img { width: 100%; height: 100%; display: block; object-fit: cover; filter: grayscale(.1) brightness(.82); }
+    .photo-block.tall { aspect-ratio: 4/4; }
+    .photo-block.wide { aspect-ratio: 5/3; }
+    .photo-block figcaption {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 5px 8px;
+      background: linear-gradient(to top, rgba(0, 0, 0, .95), transparent);
+    }
+    .photo-block figcaption .es {
+      font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 600; font-size: 11px;
+      color: var(--ivory); display: block; line-height: 1.2;
+    }
+    .photo-block figcaption .en { font-family: 'Montserrat'; font-size: 7.5px; color: var(--grey); display: block; }
+
+    .disclaimer { border-top: 1px solid var(--hair); margin-top: 12px; padding-top: 9px; }
+    .disclaimer p { font-family: 'Montserrat'; font-size: 6.6px; color: var(--grey-dim); line-height: 1.45; margin: 0 0 4px; text-align: center; }
+    .footer-socials { display: flex; justify-content: center; gap: 18px; margin-top: 9px; font-size: 9px; color: var(--ivory); }
+    .footer-socials i { color: var(--white); margin-right: 4px; font-size: 11px; }
+
+    @media (max-width:720px) { .content-flow { column-count: 1; } }
+
+    @media print {
+      @page { size: legal portrait; margin: 0.5cm; }
+      body { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .no-print { display: none !important; }
+      main { padding: 0; max-width: 100%; gap: 0; }
+      .page {
+        border: none !important;
+        max-width: 100% !important;
+        width: 100%;
+        break-after: page;
+        page-break-after: always;
+      }
+      .page:last-child { break-after: auto; page-break-after: auto; }
+      .page-label { display: none; }
+      .photo-block img { filter: grayscale(.1) brightness(.78) !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="toolbar no-print">
+    <div class="toolbar-inner">
+      <div class="brandmark cinzel">LA LUN<span>Λ</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+        <button class="btn-outline" id="editBtn" onclick="toggleEdit()"><i class="fa-solid fa-pen"></i> <span
+            id="editBtnLabel">Editar</span></button>
+        <button class="btn-solid" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Guardar PDF</button>
+      </div>
+    </div>
+  </header> 
+
+  <div class="edit-banner no-print" id="editBanner"><i class="fa-solid fa-circle-info"></i> Modo edición: haz clic en cualquier texto o precio para escribir directamente.</div>
+  <p class="page-note no-print">Tamaño oficio (legal), vertical · 2 páginas para imprimir a doble cara en una sola hoja (frente y vuelta) · Español e inglés siempre visibles.<br>
+  <strong>Importante al exportar:</strong> en el diálogo de impresión, en "Tamaño del papel" elige <strong>Oficio / Legal</strong> (no Carta), o el contenido se recortará/deformará.</p>
+
+  <main>
+
+    <!-- ================= PÁGINA 1 · FRENTE ================= -->
+    <section class="page" id="page1">
+      <span class="page-label no-print">Página 1 · Frente</span>
+
+      <div class="menu-header">
+        <h1 class="logo-line cinzel">LA LUN<span class="a">Λ</span></h1>
+        <div class="sub-line"><span class="rule"></span><span class="tag">Kitchen &amp; Bar</span><span class="rule"></span></div>
+        <p class="tagline editable" contenteditable="false">MEXICAN FOOD</p>
+        <div class="socials">
+          <span><i class="fa-brands fa-facebook"></i>La Luna Kitchen & Bar</span>
+          <span><i class="fa-brands fa-instagram"></i>@lalunakitchenbar</span>
+          <span><i class="fa-brands fa-tiktok"></i>@lalunakitchenbar</span>
+        </div>
+      </div>
+
+      <div class="content-flow">
+
+        <figure class="photo-block wide">
+          <img src="images/CARNE.png" alt="Carne Asada con Camarón">
+          <figcaption>
+            <span class="es editable" contenteditable="false">Carne Asada con Camarón</span>
+            <span class="en editable" contenteditable="false">Carne Asada with Shrimp</span>
+          </figcaption>
+        </figure>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Entradas</span><span class="note">Appetizers</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Guacamole Individual</span><span class="dish-en editable" contenteditable="false">Individual Guacamole</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Guacamole Familiar</span><span class="dish-en editable" contenteditable="false">Family Guacamole</span><span class="leader"></span><span class="price editable" contenteditable="false">$12</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Cheese Dip</span><span class="dish-en editable" contenteditable="false">Cheese Dip</span><span class="leader"></span><span class="price editable" contenteditable="false">$6</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Gorditas de Queso (Orden de 3)</span><span class="dish-en editable" contenteditable="false">Cheese Gorditas (Order of 3)</span><span class="leader"></span><span class="price editable" contenteditable="false">$21</span></div>
+            <p class="desc editable" contenteditable="false">Maíz con jalapeño y queso. — Corn with jalapeño and cheese.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Carne Seca en Botana</span><span class="dish-en editable" contenteditable="false">Beef Jerky Snack</span><span class="leader"></span><span class="price editable" contenteditable="false">$15</span></div>
+            <p class="desc editable" contenteditable="false">Con pepino, Tostitos y cacahuates. — With cucumber, Tostitos and peanuts.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tuna</span><span class="dish-en editable" contenteditable="false">Fresh Tuna Snack</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Jalapeños</span><span class="dish-en editable" contenteditable="false">Jalapeños</span><span class="leader"></span><span class="price editable" contenteditable="false">$19.99</span></div>
+            <p class="desc editable" contenteditable="false">6 chiles jalapeños con tocino y queso. — 6 jalapeño peppers with bacon and cheese.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones al Vapor</span><span class="dish-en editable" contenteditable="false">Steamed Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Cortes &amp; Parrilla</span><span class="note">Steaks &amp; grill · incl. 2 guarniciones / 2 sides</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Steak Sirloin (8 oz)</span><span class="dish-en editable" contenteditable="false">Sirloin Steak (8 oz)</span><span class="leader"></span><span class="price editable" contenteditable="false">$26.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Steak T-Bone (12 oz)</span><span class="dish-en editable" contenteditable="false">T-Bone Steak (12 oz)</span><span class="leader"></span><span class="price editable" contenteditable="false">$31.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de Pollo</span><span class="dish-en editable" contenteditable="false">Chicken Fajitas</span><span class="leader"></span><span class="price editable" contenteditable="false">$26</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de Res</span><span class="dish-en editable" contenteditable="false">Beef Fajitas</span><span class="leader"></span><span class="price editable" contenteditable="false">$27</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de Camarón</span><span class="dish-en editable" contenteditable="false">Shrimp Fajitas</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Carne Asada</span><span class="dish-en editable" contenteditable="false">Carne Asada</span><span class="leader"></span><span class="price editable" contenteditable="false">$30</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Carne Asada de Arrachera</span><span class="dish-en editable" contenteditable="false">Skirt Steak Carne Asada</span><span class="leader"></span><span class="price editable" contenteditable="false">$36</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Carne Asada con Camarón</span><span class="dish-en editable" contenteditable="false">Carne Asada with Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$33</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chile Colorado de Res</span><span class="dish-en editable" contenteditable="false">Beef Chile Colorado</span><span class="leader"></span><span class="price editable" contenteditable="false">$26</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chile Verde de Pork</span><span class="dish-en editable" contenteditable="false">Pork Chile Verde</span><span class="leader"></span><span class="price editable" contenteditable="false">$26</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Molcajete C.M.T. (Para 2 personas)</span><span class="dish-en editable" contenteditable="false">C.M.T. Molcajete (Serves 2)</span><span class="leader"></span><span class="price editable" contenteditable="false">$42</span></div></div>
+        </div>
+
+        <figure class="photo-block tall">
+          <img src="images/PIZZA.jpeg" alt="PizzaBirria">
+          <figcaption>
+            <span class="es editable" contenteditable="false">PizzaBirria</span>
+          </figcaption>
+        </figure>
+
+
+
+        <div class="category">
+          <div class="category-title"><span class="es">Tacos &amp; Antojitos</span><span class="note">Tacos &amp; Mexican Favs</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">PizzaBirria <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">PizzaBirria</span><span class="leader"></span><span class="price editable" contenteditable="false">$32</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tacos (Asada, Pastor, Pollo o Adobada)</span><span class="dish-en editable" contenteditable="false">Tacos (Asada, Pastor, Chicken or Adobada)</span><span class="leader"></span><span class="price editable" contenteditable="false">$5</span></div></div>
+        <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Taco de Lengua</span><span class="dish-en editable" contenteditable="false">Beef Tongue Taco</span><span class="leader"></span><span class="price editable" contenteditable="false">$7</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesabirrias (Orden de 3) <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Quesabirrias (Order of 3)</span><span class="leader"></span><span class="price editable" contenteditable="false">$22</span></div>
+            <p class="desc editable" contenteditable="false">Con consomé. — Served with consommé.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tacos Capeados de Camarón (Orden de 3)</span><span class="dish-en editable" contenteditable="false">Battered Shrimp Tacos (Order of 3)</span><span class="leader"></span><span class="price editable" contenteditable="false">$22</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tacos Capeados de Pescado (Orden de 3)</span><span class="dish-en editable" contenteditable="false">Battered Fish Tacos (Order of 3)</span><span class="leader"></span><span class="price editable" contenteditable="false">$22</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tacos de Camarón Rancheros</span><span class="dish-en editable" contenteditable="false">Ranchero Shrimp Tacos</span><span class="leader"></span><span class="price editable" contenteditable="false">$8</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Torta (Asada, Adobada o Pollo)</span><span class="dish-en editable" contenteditable="false">Torta (Asada, Adobada or Chicken)</span><span class="leader"></span><span class="price editable" contenteditable="false">$16</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Torta de Lengua</span><span class="dish-en editable" contenteditable="false">Beef Tongue Torta</span><span class="leader"></span><span class="price editable" contenteditable="false">$18</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesabirria Plain</span><span class="dish-en editable" contenteditable="false">Plain Quesabirria</span><span class="leader"></span><span class="price editable" contenteditable="false">$12</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesabirria de Harina <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Flour Quesabirria</span><span class="leader"></span><span class="price editable" contenteditable="false">$16</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesadilla (Asada, Pollo o Adobada)</span><span class="dish-en editable" contenteditable="false">Quesadilla (Asada, Chicken or Adobada)</span><span class="leader"></span><span class="price editable" contenteditable="false">$16</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesadilla de Lengua</span><span class="dish-en editable" contenteditable="false">Beef Tongue Quesadilla</span><span class="leader"></span><span class="price editable" contenteditable="false">$18</span></div></div>
+        </div>
+
+        <figure class="photo-block" style="height: 170px; margin-bottom: 8px; border-radius: 4px;">
+          <img src="images/BURRITO.png" alt="Burrito" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+          <figcaption><span class="es editable" contenteditable="false">Burrito</span></figcaption>
+        </figure>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Burritos</span><span class="note">Burritos</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Plain (Queso, Frijoles y Arroz)</span><span class="dish-en editable" contenteditable="false">Plain (Cheese, Beans &amp; Rice)</span><span class="leader"></span><span class="price editable" contenteditable="false">$12.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Asada, Adobada, Pollo</span><span class="dish-en editable" contenteditable="false">Asada, Adobada, Chicken</span><span class="leader"></span><span class="price editable" contenteditable="false">$16.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Lengua</span><span class="dish-en editable" contenteditable="false">Beef Tongue</span><span class="leader"></span><span class="price editable" contenteditable="false">$18.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chile Colorado de Res</span><span class="dish-en editable" contenteditable="false">Beef Chile Colorado</span><span class="leader"></span><span class="price editable" contenteditable="false">$16.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chile Verde de Cerdo</span><span class="dish-en editable" contenteditable="false">Pork Chile Verde</span><span class="leader"></span><span class="price editable" contenteditable="false">$16.99</span></div></div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Enchiladas</span><span class="note">Lechuga, cilantro, crema, queso, cebolla / Lettuce, cilantro, sour cream, cheese, onion</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Naturales de Queso</span><span class="dish-en editable" contenteditable="false">Cheese Enchiladas</span><span class="leader"></span><span class="price editable" contenteditable="false">$16.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Enchiladas Verdes de Pollo</span><span class="dish-en editable" contenteditable="false">Green Chicken Enchiladas</span><span class="leader"></span><span class="price editable" contenteditable="false">$22.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Enchiladas Rojas de Pollo</span><span class="dish-en editable" contenteditable="false">Red Chicken Enchiladas</span><span class="leader"></span><span class="price editable" contenteditable="false">$22.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Flautas de Pollo</span><span class="dish-en editable" contenteditable="false">Chicken Flautas</span><span class="leader"></span><span class="price editable" contenteditable="false">$22.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostadas de Pollo (Orden 3)</span><span class="dish-en editable" contenteditable="false">Chicken Tostadas (Order of 3)</span><span class="leader"></span><span class="price editable" contenteditable="false">$22.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Sopes de Pollo (Orden de 3)</span><span class="dish-en editable" contenteditable="false">Chicken Sopes (Order of 3)</span><span class="leader"></span><span class="price editable" contenteditable="false">$22.00</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Taco Sala</span><span class="dish-en editable" contenteditable="false">Taco Salad</span><span class="leader"></span><span class="price editable" contenteditable="false">$18.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ensalada de Pollo</span><span class="dish-en editable" contenteditable="false">Chicken Salad</span><span class="leader"></span><span class="price editable" contenteditable="false">$15.99</span></div></div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Hamburguesas &amp; Wings</span><span class="note">Burgers &amp; wings</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Hamburguesa de Res</span><span class="dish-en editable" contenteditable="false">Beef Burger</span><span class="leader"></span><span class="price editable" contenteditable="false">$21</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Hamburguesa Hawaiian</span><span class="dish-en editable" contenteditable="false">Hawaiian Burger</span><span class="leader"></span><span class="price editable" contenteditable="false">$22</span></div>
+            <p class="desc editable" contenteditable="false">Con piña y queso derretido. — With pineapple and melted cheese.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Hamburguesa de Camarón</span><span class="dish-en editable" contenteditable="false">Shrimp Burger</span><span class="leader"></span><span class="price editable" contenteditable="false">$23</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Hamburguesa Mar y Tierra</span><span class="dish-en editable" contenteditable="false">Surf &amp; Turf Burger</span><span class="leader"></span><span class="price editable" contenteditable="false">$23</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Alitas Mango Habanero (6 pcs) 🌶</span><span class="dish-en editable" contenteditable="false">Mango Habanero Wings (6 pcs)</span><span class="leader"></span><span class="price editable" contenteditable="false">$13</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Alitas Búfalo (6 pcs) 🌶</span><span class="dish-en editable" contenteditable="false">Buffalo Wings (6 pcs)</span><span class="leader"></span><span class="price editable" contenteditable="false">$13</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Alitas BBQ (6 pcs)</span><span class="dish-en editable" contenteditable="false">BBQ Wings (6 pcs)</span><span class="leader"></span><span class="price editable" contenteditable="false">$13</span></div></div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Menú Kids</span><span class="note">Kids menu · incl. papas y bebida / fries &amp; drink</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Enchilada / Quesadilla / Nuggets / Taco / Burrito</span><span class="dish-en editable" contenteditable="false" style="white-space: nowrap;">(Elige una · Choose one)</span><span class="leader"></span><span class="price editable" contenteditable="false">$12</span></div></div>
+        </div>
+
+
+
+      </div>
+    </section>
+
+    <!-- ================= PÁGINA 2 · VUELTA ================= -->
+    <section class="page" id="page2">
+      <span class="page-label no-print">Página 2 · Vuelta</span>
+
+      <div class="back-header">
+        <div class="mark cinzel">LA LUN<span class="a">Λ</span></div>
+        <p class="kicker editable" contenteditable="false">Mariscos &amp; especialidades de la casa <span style="color:var(--grey-dim);font-size:10px;">— Seafood &amp; Mexican House Specialties</span></p>
+      </div>
+
+      <div class="content-flow">
+
+        <figure class="photo-block wide" style="height: 220px;">
+          <img src="images/AGUACHILES.jpeg" alt="Charola Botanera de Aguachiles y Ceviches">
+          <figcaption>
+            <span class="es editable" contenteditable="false">Aguachile 3 Salsas 🌶</span>
+            <span class="en editable" contenteditable="false">Combination of red, green, and black sauce</span>
+          </figcaption>
+        </figure>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Aguachiles</span><span class="note">Shrimp in chile-lime (raw or cooked) · *crudo/cocido</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Verdes 🌶</span><span class="dish-en editable" contenteditable="false">Green Aguachiles</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Rojos 🌶</span><span class="dish-en editable" contenteditable="false">Red Aguachiles</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Piquín 🌶</span><span class="dish-en editable" contenteditable="false">Piquin Aguachiles</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Negros 🌶 <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Black Aguachiles</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
+            <p class="desc editable" contenteditable="false">Salsa negra de la casa. — House black sauce.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles al Guacamole</span><span class="dish-en editable" contenteditable="false">Guacamole-Style Aguachile</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Mango Habanero 🌶</span><span class="dish-en editable" contenteditable="false">Mango Habanero Aguachiles</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachile 3 Salsas 🌶</span><span class="dish-en editable" contenteditable="false">Aguachile with 3 Salsas</span><span class="leader"></span><span class="price editable" contenteditable="false">$38</span></div>
+            <p class="desc editable" contenteditable="false">Combinación de salsa roja, verde y negra. — Combination of red, green, and black sauce.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachile Mixto con Ceviche 🌶</span><span class="dish-en editable" contenteditable="false">Mixed Aguachile with Ceviche</span><span class="leader"></span><span class="price editable" contenteditable="false">$38</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Torre Sencilla de Camarón</span><span class="dish-en editable" contenteditable="false">Simple Shrimp Tower</span><span class="leader"></span><span class="price editable" contenteditable="false">$35</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Torre Luna <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Luna Tower</span><span class="leader"></span><span class="price editable" contenteditable="false">$55</span></div>
+            <p class="desc editable" contenteditable="false">Callo de hacha, pulpo, camarón cocido/curtido, ceviche de camarón y pescado. — Scallops, octopus, cooked/cured shrimp, shrimp &amp; fish ceviche.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Pecado en La Luna</span><span class="dish-en editable" contenteditable="false">Pecado en La Luna</span><span class="leader"></span><span class="price editable" contenteditable="false">$54</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Charola Botanera de Aguachiles y Ceviches</span><span class="dish-en editable" contenteditable="false">Aguachiles &amp; Ceviches Snack Tray</span><span class="leader"></span><span class="price editable" contenteditable="false">$80</span></div>
+            <p class="desc editable" contenteditable="false">Variedad de hasta 5 sabores. — Variety of up to 5 flavors.</p></div>
+        </div>
+
+        <figure class="photo-block tall">
+          <img src="images/TOSTADAAGUACHILE.jpeg" alt="Tostada de Aguachile">
+          <figcaption>
+            <span class="es editable" contenteditable="false">Tostada de Aguachile</span>
+          </figcaption>
+        </figure>
+
+            <div class="category">
+          <div class="category-title"><span class="es">Postres</span><span class="note">Desserts</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Pastel de Tres Leches</span><span class="dish-en editable" contenteditable="false">Tres Leches Cake</span><span class="leader"></span><span class="price editable" contenteditable="false">$7</span></div>
+            <p class="desc editable" contenteditable="false">Pastel esponjoso bañado en tres tipos de leche. — Soft sponge cake soaked in three kinds of milk.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Flan</span><span class="dish-en editable" contenteditable="false">Flan</span><span class="leader"></span><span class="price editable" contenteditable="false">$7</span></div>
+            <p class="desc editable" contenteditable="false">Casero, bañado en caramelo. — Homemade, topped with caramel.</p></div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Ceviches &amp; Ostiones</span><span class="note">Ceviche &amp; oysters · *crudo/raw</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ceviche de Camarón Cocido</span><span class="dish-en editable" contenteditable="false">Cooked Shrimp Ceviche</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ceviche de Camarón Curtido</span><span class="dish-en editable" contenteditable="false">Lime-Cured Shrimp Ceviche</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ceviche de Pescado</span><span class="dish-en editable" contenteditable="false">Fish Ceviche</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ceviche de Mango</span><span class="dish-en editable" contenteditable="false">Mango Ceviche</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ceviche de Camarón con Pulpo <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Shrimp and Octopus Ceviche</span><span class="leader"></span><span class="price editable" contenteditable="false">$35</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Cóctel de Camarón Frío</span><span class="dish-en editable" contenteditable="false">Cold Shrimp Cocktail</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ostiones (6 piezas)</span><span class="dish-en editable" contenteditable="false">Oysters (6 pieces)</span><span class="leader"></span><span class="price editable" contenteditable="false">$20</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ostiones (12 piezas)</span><span class="dish-en editable" contenteditable="false">Oysters (12 pieces)</span><span class="leader"></span><span class="price editable" contenteditable="false">$36</span></div></div>
+        </div>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Tostadas</span><span class="note">*crudo/raw</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de Ceviche Cocido o Curtido</span><span class="dish-en editable" contenteditable="false">Cooked or Cured Ceviche Tostada</span><span class="leader"></span><span class="price editable" contenteditable="false">$14.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de Pescado</span><span class="dish-en editable" contenteditable="false">Fish Tostada</span><span class="leader"></span><span class="price editable" contenteditable="false">$13</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de Ceviche o Aguachile con Pulpo <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Ceviche or Aguachile Tostada with Octopus</span><span class="leader"></span><span class="price editable" contenteditable="false">$18</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de Aguachile 🌶</span><span class="dish-en editable" contenteditable="false">Aguachile Tostada</span><span class="leader"></span><span class="price editable" contenteditable="false">$14.99</span></div></div>
+        </div>
+
+        <figure class="photo-block wide">
+          <img src="images/CHICHARRON.jpeg" alt="Chicharrón de Pescado">
+          <figcaption>
+            <span class="es editable" contenteditable="false">Chicharrón de Pescado</span>
+            <span class="en editable" contenteditable="false">Fish Chicharrón</span>
+          </figcaption>
+        </figure>
+
+        <div class="category">
+          <div class="category-title"><span class="es">Mariscos Barra Caliente</span><span class="note">Hot seafood bar</span></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones Rancheros</span><span class="dish-en editable" contenteditable="false">Ranchero Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
+            <p class="desc editable" contenteditable="false">Servido con arroz y ensalada. — Served with rice and salad.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones a la Diabla 🌶</span><span class="dish-en editable" contenteditable="false">Diabla Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones a la Cucaracha <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Cucaracha Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones a la Mantequilla</span><span class="dish-en editable" contenteditable="false">Butter Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones al Mojo de Ajo</span><span class="dish-en editable" contenteditable="false">Garlic Butter Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones a la Momia</span><span class="dish-en editable" contenteditable="false">Mummy Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
+            <p class="desc editable" contenteditable="false">Rellenos envueltos en tocino. — Stuffed shrimp wrapped in bacon.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones a la Crema</span><span class="dish-en editable" contenteditable="false">Creamy Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones Empanizados</span><span class="dish-en editable" contenteditable="false">Breaded Shrimp</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Caldo de Camarón</span><span class="dish-en editable" contenteditable="false">Shrimp Soup</span><span class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Caldo de Camarón y Pulpo</span><span class="dish-en editable" contenteditable="false">Shrimp and Octopus Soup</span><span class="leader"></span><span class="price editable" contenteditable="false">$35</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Camarones Estilo Louisiana (4 personas)</span><span class="dish-en editable" contenteditable="false">Louisiana Style Shrimp (Serves 4)</span><span class="leader"></span><span class="price editable" contenteditable="false">$120</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Mojarra Frita</span><span class="dish-en editable" contenteditable="false">Fried Tilapia</span><span class="leader"></span><span class="price editable" contenteditable="false">$27</span></div></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chicharrón de Pescado Estilo Santa María del Oro <span class="star">★</span></span><span class="dish-en editable" contenteditable="false">Santa María del Oro Style Fish Chicharrón</span><span class="leader"></span><span class="price editable" contenteditable="false">$32.99</span></div>
+            <p class="desc editable" contenteditable="false">Con guacamole, salsa mexicana, salsa verde y tortillas hechas a mano. — With guacamole, salsas &amp; handmade tortillas.</p></div>
+          <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chicharrón de Pescado (Para 4 personas)</span><span class="dish-en editable" contenteditable="false">Fish Chicharrón (Serves 4)</span><span class="leader"></span><span class="price editable" contenteditable="false">$115</span></div></div>
+        </div>
+
+    
+
+                <div class="category">
+          <div class="category-title"><span class="es">Extras</span><span class="note">Sides</span></div>
+          <div class="extras-grid">
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Papas Fritas</span><span class="dish-en editable" contenteditable="false">French Fries</span><span class="leader"></span><span class="price editable" contenteditable="false">$6</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Puré de Papa</span><span class="dish-en editable" contenteditable="false">Mashed Potatoes</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Espárragos</span><span class="dish-en editable" contenteditable="false">Asparagus</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Ensalada</span><span class="dish-en editable" contenteditable="false">Salad</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Beans</span><span class="dish-en editable" contenteditable="false">Beans</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Chips</span><span class="dish-en editable" contenteditable="false">Chips</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Arroz</span><span class="dish-en editable" contenteditable="false">Rice</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Tortillas</span><span class="dish-en editable" contenteditable="false">Tortillas</span><span class="leader"></span><span class="price editable" contenteditable="false">$4</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguacate</span><span class="dish-en editable" contenteditable="false">Avocado</span><span class="leader"></span><span class="price editable" contenteditable="false">$3</span></div></div>
+            <div class="dish"><div class="dish-row"><span class="dish-name editable" contenteditable="false">Salsa</span><span class="dish-en editable" contenteditable="false">Salsa</span><span class="leader"></span><span class="price editable" contenteditable="false">$2</span></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="disclaimer">
+        <p class="editable" contenteditable="false">*Estos platillos se sirven crudos o medio crudos. El consumo de carnes de res, aves, mariscos, crustáceos o huevos crudos o poco cocidos puede aumentar el riesgo de enfermedades transmitidas por alimentos, especialmente si usted padece ciertas condiciones médicas.</p>
+        <p class="editable" contenteditable="false">*These dishes are served raw or undercooked. Consuming raw or undercooked beef, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially if you have certain medical conditions.</p>
+      </div>
+
+      <div class="footer-socials">
+        <span><i class="fa-brands fa-facebook"></i>La Luna Kitchen & Bar</span>
+        <span><i class="fa-brands fa-instagram"></i>@lalunakitchenbar</span>
+        <span><i class="fa-brands fa-tiktok"></i>@lalunakitchenbar</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let editing = false;
+    function toggleEdit() {
+      editing = !editing;
+      document.querySelectorAll('.editable').forEach(el => {
+        el.contentEditable = editing;
+        el.classList.toggle('on', editing);
+      });
+      document.getElementById('editBanner').style.display = editing ? 'block' : 'none';
+      document.getElementById('editBtnLabel').innerText = editing ? 'Guardar' : 'Editar';
+    }
+  </script>
+</body>
+
+</html>
