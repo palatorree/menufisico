@@ -11,6 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --white: #fff;
@@ -421,18 +422,44 @@
       font-size: 11px;
     }
 
-    @media (max-width:720px) {
-      .content-flow {
-        column-count: 1;
-      }
+    /* Hoja legal fija, igual en pantalla y en impresión */
+    .page {
+      background: #000;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .22);
+      width: 8.5in;
+      height: 14in;
+      padding: 0.45in 0.4in 0.35in;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    main {
+      max-width: none;
+      overflow-x: auto;
+    }
+
+    /* El contenido ocupa todo el espacio entre el encabezado y el aviso legal */
+    .content-flow {
+      column-count: 2;
+      column-gap: 26px;
+      flex: 1 1 0;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .disclaimer {
+      margin-top: auto;
     }
 
     @media print {
       @page {
-        size: legal portrait;
-        margin: 0.5cm;
+        size: 8.5in 14in;
+        margin: 0;
       }
 
+      html,
       body {
         background: #000 !important;
         -webkit-print-color-adjust: exact;
@@ -444,17 +471,14 @@
       }
 
       main {
+        display: block;
         padding: 0;
-        max-width: 100%;
         gap: 0;
       }
 
       .page {
-        border: none !important;
-        max-width: 100% !important;
-        width: 100%;
-        min-height: 100vh;
-        padding: 20px 24px 16px !important;
+        box-shadow: none;
+        height: 13.97in;
         break-after: page;
         page-break-after: always;
       }
@@ -471,6 +495,21 @@
       .photo-block img {
         filter: grayscale(.1) brightness(.78) !important;
       }
+    }
+
+    .photo-block.banner {
+      width: 100%;
+      height: 1.6in;
+      aspect-ratio: auto;
+      flex: 0 0 auto;
+      margin: 0 0 12px;
+    }
+
+    .photo-block.banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
   </style>
 </head>
@@ -660,8 +699,8 @@
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Tacos (Asada, Pastor, Pollo o
                 Adobada)</span><span class="dish-en editable" contenteditable="false">Asada, Pastor, Chicken or
-                Adobada</span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$5</span></div>
+                Adobada</span><span class="leader"></span><span class="price editable" contenteditable="false">$5</span>
+            </div>
           </div>
 
           <div class="dish">
@@ -868,9 +907,9 @@
         <p class="editable" contenteditable="false">*These dishes are served raw or undercooked. Consuming raw or
           undercooked beef, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially
           if you have certain medical conditions.</p>
-           <p class="editable" contenteditable="false">*These dishes are served raw or undercooked. Consuming raw or
-          undercooked beef, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially
-          if you have certain medical conditions.</p>
+        <p class="editable" contenteditable="false">*Estos platillos se sirven crudos o medio crudos. El consumo de
+          carnes de res, aves, mariscos, crustáceos o huevos crudos o poco cocidos puede aumentar el riesgo de
+          enfermedades transmitidas por alimentos, especialmente si usted padece ciertas condiciones médicas.</p>
       </div>
 
     </section>
@@ -890,14 +929,13 @@
 
       <div class="content-flow">
 
-        <figure class="photo-block wide" style="height: 220px;">
-          <img src="images/3aguas.png" alt="Charola Botanera de Aguachiles y Ceviches">
-          <figcaption>
-            <span class="es editable" contenteditable="false">Aguachile 3 Salsas</span>
-            <span class="en editable" contenteditable="false">Combination of red, green, and black sauce</span>
-          </figcaption>
+        <figure class="photo-block banner">
+        <img src="images/3aguas.png" alt="Charola Botanera de Aguachiles y Ceviches">
+        <figcaption>
+          <span class="es editable" contenteditable="false">Aguachile 3 Salsas</span>
+          <span class="en editable" contenteditable="false">Combination of red, green, and black sauce</span>
+        </figcaption>
         </figure>
-
         <div class="category">
           <div class="category-title"><span class="es">Aguachiles</span><span class="note">Shrimp in chile-lime (raw or
               cooked) · *crudo/cocido</span></div>
@@ -917,7 +955,8 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Negros</span><span class="dish-en editable" contenteditable="false">Black
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Negros</span><span
+                class="dish-en editable" contenteditable="false">Black
                 Aguachiles</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$29.99</span></div>
             <p class="desc editable" contenteditable="false">Salsa negra de la casa. — House black sauce.</p>
@@ -972,29 +1011,12 @@
           </div>
         </div>
 
-        <figure class="photo-block tall">
+        <figure class="photo-block wide">
           <img src="images/torre.png" alt="Torre Sencilla de Camarón">
           <figcaption>
             <span class="es editable" contenteditable="false">Torre Sencilla de Camarón</span>
           </figcaption>
         </figure>
-
-        <div class="category">
-          <div class="category-title"><span class="es">Postres</span><span class="note">Desserts</span></div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Pastel de Tres
-                Leches</span><span class="dish-en editable" contenteditable="false">Tres Leches Cake</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$7</span></div>
-            <p class="desc editable" contenteditable="false">Pastel esponjoso bañado en tres tipos de leche. — Soft
-              sponge cake soaked in three kinds of milk.</p>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Flan</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$7</span></div>
-            <p class="desc editable" contenteditable="false">Casero, bañado en caramelo. — Homemade, topped with
-              caramel.</p>
-          </div>
-        </div>
 
         <div class="category">
           <div class="category-title"><span class="es">Ceviches &amp; Ostiones</span><span class="note">Ceviche &amp;
@@ -1218,6 +1240,24 @@
             </div>
           </div>
         </div>
+        
+        <div class="category">
+          <div class="category-title"><span class="es">Postres</span><span class="note">Desserts</span></div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Pastel de Tres
+                Leches</span><span class="dish-en editable" contenteditable="false">Tres Leches Cake</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$7</span></div>
+            <p class="desc editable" contenteditable="false">Pastel esponjoso bañado en tres tipos de leche. — Soft
+              sponge cake soaked in three kinds of milk.</p>
+          </div>
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Flan</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$7</span></div>
+            <p class="desc editable" contenteditable="false">Casero, bañado en caramelo. — Homemade, topped with
+              caramel.</p>
+          </div>
+        </div>
+
 
       </div>
 
@@ -1249,7 +1289,29 @@
       });
       document.getElementById('editBanner').style.display = editing ? 'block' : 'none';
       document.getElementById('editBtnLabel').innerText = editing ? 'Guardar' : 'Editar';
+      if (!editing) fitAll();
     }
+
+    function fitPage(page) {
+      const flow = page.querySelector('.content-flow');
+      let lo = 0.6, hi = 2.2, best = lo;
+      for (let i = 0; i < 16; i++) {
+        const mid = (lo + hi) / 2;
+        flow.style.zoom = mid;
+        const overflow =
+          flow.scrollWidth > flow.clientWidth + 1 ||
+          flow.scrollHeight > flow.clientHeight + 1;
+        if (overflow) hi = mid; else { best = mid; lo = mid; }
+      }
+      flow.style.zoom = best * 0.99;
+    }
+
+    function fitAll() {
+      document.querySelectorAll('.page').forEach(fitPage);
+    }
+
+    window.addEventListener('load', () => document.fonts.ready.then(fitAll));
+    window.addEventListener('beforeprint', fitAll);
   </script>
 </body>
 
