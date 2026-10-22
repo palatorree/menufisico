@@ -293,8 +293,8 @@
     }
 
     .photo-block.cantarito {
-  aspect-ratio: 16/9;
-}
+      aspect-ratio: 16/9;
+    }
 
     /* Page 2 (Bebidas) is much denser, so give it a bit more safety margin
        against font-metric differences (real Google Fonts vs. this preview)
@@ -442,6 +442,15 @@
       padding-top: 8px;
     }
 
+    .disclaimer,
+    .footer-socials {
+      flex: 0 0 auto;
+    }
+
+    .footer-socials span {
+      white-space: nowrap;
+    }
+
     .disclaimer p {
       font-family: 'Montserrat';
       font-size: 6.5px;
@@ -542,26 +551,9 @@
       page-break-after: auto;
     }
 
-    .content-flow {
-      flex: 1 1 auto;
-    }
-
-    /* ocupa el espacio sobrante */
-    .disclaimer {
-      margin-top: auto;
-    }
-
-    /* pie siempre al fondo */
-
-    .page-label {
-      display: none;
-    }
-
     .photo-block img {
       filter: grayscale(.1) brightness(.78) !important;
     }
-
-    
   </style>
 </head>
 
@@ -1144,8 +1136,8 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$15.00</span></div>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mojito</span></span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$13.99</span></div>
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mojito</span>
+              class="leader"></span><span class="price editable" contenteditable="false">$13.99</span></div>
             <p class="desc editable" contenteditable="false">Piña, Mango, Pepino, Kiwi o Fresa. — Pineapple, Mango,
               Cucumber, Kiwi or Strawberry.</p>
           </div>
@@ -1224,8 +1216,8 @@
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Mini
-                Patrón</span></span><span class="leader"></span><span class="price editable"
-                contenteditable="false">$18.00</span></div>
+                Patrón</span><span class="leader"><span class="price editable" contenteditable="false">$18.00</span>
+            </div>
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Sex on the Beach</span><span
@@ -1489,6 +1481,7 @@
           </div>
         </div>
 
+
         <div class="category">
           <div class="category-title"><span class="es">Cerveza Sin Alcohol</span><span class="note">Non-Alcoholic
               Beer</span></div>
@@ -1496,39 +1489,30 @@
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Corona</span><span
                 class="leader"></span><span class="price editable" contenteditable="false">$5.00</span></div>
           </div>
-          <!-- Imagen 4 Bebidas -->
-          <div class="category">
-            <div class="category-title"><span class="es">Cerveza Sin Alcohol</span><span class="note">Non-Alcoholic
-                Beer</span></div>
-            <div class="dish">
-              <div class="dish-row"><span class="dish-name editable" contenteditable="false">Corona</span><span
-                  class="leader"></span><span class="price editable" contenteditable="false">$5.00</span></div>
-            </div>
-          </div>
-
-          <figure class="photo-block cantarito">
-            <img src="images/cantarito1.png" alt="Cantarito">
-            <figcaption>
-              <span class="es editable" contenteditable="false">Cantarito</span>
-            </figcaption>
-          </figure>
-
         </div>
 
-        <div class="disclaimer">
-          <p class="editable" contenteditable="false">Evite el exceso. El consumo de bebidas alcohólicas es exclusivo
-            para
-            mayores de edad.</p>
-          <p class="editable" contenteditable="false">Please drink responsibly. Alcohol service is restricted to legal
-            age
-            adults.</p>
-        </div>
+        <!-- Imagen 4 Bebidas -->
+        <figure class="photo-block cantarito">
+          <img src="images/cantarito1.png" alt="Cantarito">
+          <figcaption>
+            <span class="es editable" contenteditable="false">Cantarito</span>
+          </figcaption>
+        </figure>
 
-        <div class="footer-socials">
-          <span><i class="fa-brands fa-facebook"></i>La Luna Kitchen & Bar</span>
-          <span><i class="fa-brands fa-instagram"></i>@lalunakitchenbar</span>
-          <span><i class="fa-brands fa-tiktok"></i>@lalunakitchenbar</span>
-        </div>
+      </div> <!-- aquí cierra content-flow -->
+
+      <div class="disclaimer">
+        <p class="editable" contenteditable="false">Evite el exceso. El consumo de bebidas alcohólicas es exclusivo
+          para mayores de edad.</p>
+        <p class="editable" contenteditable="false">Please drink responsibly. Alcohol service is restricted to legal
+          age adults.</p>
+      </div>
+
+      <div class="footer-socials">
+        <span><i class="fa-brands fa-facebook"></i>La Luna Kitchen & Bar</span>
+        <span><i class="fa-brands fa-instagram"></i>@lalunakitchenbar</span>
+        <span><i class="fa-brands fa-tiktok"></i>@lalunakitchenbar</span>
+      </div>
     </section>
 
   </main>
