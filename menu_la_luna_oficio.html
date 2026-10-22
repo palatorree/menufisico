@@ -294,7 +294,7 @@
     .dish-name {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
-      font-size: 10px;
+      font-size: 10.5px;
       color: var(--white);
       min-width: 0;
     }
@@ -302,7 +302,7 @@
     .dish-en {
       font-family: 'Montserrat', sans-serif;
       font-style: italic;
-      font-size: 7.9px;
+      font-size: 8px;
       color: var(--grey-dim);
       min-width: 0;
     }
@@ -393,8 +393,8 @@
 
     .disclaimer {
       border-top: 1px solid var(--hair);
-      margin-top: 12px;
-      padding-top: 9px;
+      margin-top: auto;
+      padding-top: 8px;
     }
 
     .disclaimer p {
@@ -453,6 +453,8 @@
         border: none !important;
         max-width: 100% !important;
         width: 100%;
+        min-height: 100vh;
+        padding: 20px 24px 16px !important;
         break-after: page;
         page-break-after: always;
       }
@@ -585,6 +587,11 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$31.99</span></div>
           </div>
           <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de
+                Camarón</span><span class="dish-en editable" contenteditable="false">Shrimp Fajitas</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
+          </div>
+          <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de Pollo</span><span
                 class="dish-en editable" contenteditable="false">Chicken Fajitas</span><span class="leader"></span><span
                 class="price editable" contenteditable="false">$26</span></div>
@@ -593,11 +600,6 @@
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de Res</span><span
                 class="dish-en editable" contenteditable="false">Beef Fajitas</span><span class="leader"></span><span
                 class="price editable" contenteditable="false">$27</span></div>
-          </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Fajitas de
-                Camarón</span><span class="dish-en editable" contenteditable="false">Shrimp Fajitas</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Carne Asada</span><span
@@ -657,8 +659,8 @@
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Tacos (Asada, Pastor, Pollo o
-                Adobada)</span><span class="dish-en editable" contenteditable="false">Tacos (Asada, Pastor, Chicken or
-                Adobada)</span><span class="leader"></span><span class="price editable"
+                Adobada)</span><span class="dish-en editable" contenteditable="false">Asada, Pastor, Chicken or
+                Adobada</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$5</span></div>
           </div>
 
@@ -669,7 +671,7 @@
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesabirrias (Orden de 3)
-                </span><span class="dish-en editable" contenteditable="false">Quesabirrias
+              </span><span class="dish-en editable" contenteditable="false">Quesabirrias
                 (Order of 3)</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$22</span></div>
             <p class="desc editable" contenteditable="false">Con consomé. — Served with consommé.</p>
@@ -715,8 +717,8 @@
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Quesadilla (Asada, Pollo o
-                Adobada)</span><span class="dish-en editable" contenteditable="false">Quesadilla (Asada, Chicken or
-                Adobada)</span><span class="leader"></span><span class="price editable"
+                Adobada)</span><span class="dish-en editable" contenteditable="false"> Asada, Chicken or
+                Adobada</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$16</span></div>
           </div>
           <div class="dish">
@@ -798,7 +800,7 @@
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Taco Salad</span><span
-                class="dish-en editable" contenteditable="false">Taco Salad</span><span class="leader"></span><span
+                class="dish-en editable" contenteditable="false"></span><span class="leader"></span><span
                 class="price editable" contenteditable="false">$18.99</span></div>
           </div>
           <div class="dish">
@@ -835,12 +837,12 @@
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Alitas Mango Habanero (6 pcs)
-                </span><span class="dish-en editable" contenteditable="false">Mango Habanero Wings (6 pcs)</span><span
+              </span><span class="dish-en editable" contenteditable="false">Mango Habanero Wings (6 pcs)</span><span
                 class="leader"></span><span class="price editable" contenteditable="false">$13</span></div>
           </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Alitas Búfalo (6 pcs)
-                </span><span class="dish-en editable" contenteditable="false">Buffalo Wings (6 pcs)</span><span
+              </span><span class="dish-en editable" contenteditable="false">Buffalo Wings (6 pcs)</span><span
                 class="leader"></span><span class="price editable" contenteditable="false">$13</span></div>
           </div>
           <div class="dish">
@@ -862,8 +864,11 @@
         </div>
       </div>
 
-            <div class="disclaimer">
+      <div class="disclaimer">
         <p class="editable" contenteditable="false">*These dishes are served raw or undercooked. Consuming raw or
+          undercooked beef, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially
+          if you have certain medical conditions.</p>
+           <p class="editable" contenteditable="false">*These dishes are served raw or undercooked. Consuming raw or
           undercooked beef, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially
           if you have certain medical conditions.</p>
       </div>
@@ -912,8 +917,7 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$29.99</span></div>
           </div>
           <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Negros <span
-                  class="star">★</span></span><span class="dish-en editable" contenteditable="false">Black
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Aguachiles Negros</span><span class="dish-en editable" contenteditable="false">Black
                 Aguachiles</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$29.99</span></div>
             <p class="desc editable" contenteditable="false">Salsa negra de la casa. — House black sauce.</p>
@@ -1047,6 +1051,12 @@
                 Tostada</span><span class="leader"></span><span class="price editable"
                 contenteditable="false">$14.99</span></div>
           </div>
+
+          <div class="dish">
+            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de Aguachile
+              </span><span class="dish-en editable" contenteditable="false">Aguachile Tostada</span><span
+                class="leader"></span><span class="price editable" contenteditable="false">$14.99</span></div>
+          </div>
           <div class="dish">
             <div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de
                 Pescado</span><span class="dish-en editable" contenteditable="false">Fish Tostada</span><span
@@ -1058,11 +1068,7 @@
                 contenteditable="false">Ceviche or Aguachile Tostada with Octopus</span><span
                 class="leader"></span><span class="price editable" contenteditable="false">$18</span></div>
           </div>
-          <div class="dish">
-            <div class="dish-row"><span class="dish-name editable" contenteditable="false">Tostada de Aguachile
-              </span><span class="dish-en editable" contenteditable="false">Aguachile Tostada</span><span
-                class="leader"></span><span class="price editable" contenteditable="false">$14.99</span></div>
-          </div>
+
         </div>
 
         <figure class="photo-block wide">
