@@ -292,6 +292,10 @@
       aspect-ratio: 16/10;
     }
 
+    .photo-block.cantarito {
+  aspect-ratio: 16/9;
+}
+
     /* Page 2 (Bebidas) is much denser, so give it a bit more safety margin
        against font-metric differences (real Google Fonts vs. this preview)
        by tightening its vertical rhythm slightly further. */
@@ -557,7 +561,7 @@
       filter: grayscale(.1) brightness(.78) !important;
     }
 
-    }
+    
   </style>
 </head>
 
@@ -1493,28 +1497,38 @@
                 class="leader"></span><span class="price editable" contenteditable="false">$5.00</span></div>
           </div>
           <!-- Imagen 4 Bebidas -->
-          <figure class="photo-block tall">
-            <img src="images/cantarito1.png" alt="Coctelería de la Casa">
+          <div class="category">
+            <div class="category-title"><span class="es">Cerveza Sin Alcohol</span><span class="note">Non-Alcoholic
+                Beer</span></div>
+            <div class="dish">
+              <div class="dish-row"><span class="dish-name editable" contenteditable="false">Corona</span><span
+                  class="leader"></span><span class="price editable" contenteditable="false">$5.00</span></div>
+            </div>
+          </div>
+
+          <figure class="photo-block cantarito">
+            <img src="images/cantarito1.png" alt="Cantarito">
             <figcaption>
               <span class="es editable" contenteditable="false">Cantarito</span>
             </figcaption>
           </figure>
+
         </div>
 
-      </div>
+        <div class="disclaimer">
+          <p class="editable" contenteditable="false">Evite el exceso. El consumo de bebidas alcohólicas es exclusivo
+            para
+            mayores de edad.</p>
+          <p class="editable" contenteditable="false">Please drink responsibly. Alcohol service is restricted to legal
+            age
+            adults.</p>
+        </div>
 
-      <div class="disclaimer">
-        <p class="editable" contenteditable="false">Evite el exceso. El consumo de bebidas alcohólicas es exclusivo para
-          mayores de edad.</p>
-        <p class="editable" contenteditable="false">Please drink responsibly. Alcohol service is restricted to legal age
-          adults.</p>
-      </div>
-
-      <div class="footer-socials">
-        <span><i class="fa-brands fa-facebook"></i>La Luna Kitchen & Bar</span>
-        <span><i class="fa-brands fa-instagram"></i>@lalunakitchenbar</span>
-        <span><i class="fa-brands fa-tiktok"></i>@lalunakitchenbar</span>
-      </div>
+        <div class="footer-socials">
+          <span><i class="fa-brands fa-facebook"></i>La Luna Kitchen & Bar</span>
+          <span><i class="fa-brands fa-instagram"></i>@lalunakitchenbar</span>
+          <span><i class="fa-brands fa-tiktok"></i>@lalunakitchenbar</span>
+        </div>
     </section>
 
   </main>
